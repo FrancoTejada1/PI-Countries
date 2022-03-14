@@ -77,12 +77,19 @@ router.get('/countries', async (req,res) => {
 
 })
 
-router.get('/countries/{idPais}', async (req,res) => {
+router.get('/countries/:id', async (req,res) => {
     const {id} = req.params;
+    const countries = await getApiInfo();
 
     try {
-        const algoId = await Country.findByPk(id);
-        res.status(200).json(algoId)
+        let databaseCountries = await Country.findAll();
+        //si esta vacia, la completamos desde la API
+        if(!databaseCountries.length){
+        await Country.bulkCreate(countries)
+        } 
+        
+        const algoId = await Country.findByPk(id.toUpperCase());
+        res.status(200).send(algoId)
     } catch (error) {
         res.status(400).send("no mi rey")
         
