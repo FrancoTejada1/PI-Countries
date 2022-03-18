@@ -4,7 +4,7 @@ const {Country, ActivityTourist} = require('../db.js');
 
 const router = Router();
 
-var urlApi = "https://restcountries.com/v3/all";
+var urlApi = "https://restcountries.com/v3.1/all";
 //obtenemos la informacion de la api
 const getApiInfo = async () => {
     const apiUrl = await axios.get(urlApi);
@@ -13,7 +13,7 @@ const getApiInfo = async () => {
         return {
             id: d.cca3,
             name: d.name.common,
-            imgFlag: d.flags['png'],
+            imgFlag: d.flags.png,
             continent: d.continents[0],
             capital: d.capital ? d.capital[0] : "capital not found",
             subregion: d.subregion ? d.subregion : "subregion not found",

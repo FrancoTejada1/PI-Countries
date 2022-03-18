@@ -3,7 +3,7 @@ const {Country, ActivityTourist} = require('../db.js');
 
 const router = Router();
 
-router.post('/activity', async (req,res) => {
+router.post('/', async (req,res) => {
 
     const {name, dificult, duration, season, country} = req.body;
 
